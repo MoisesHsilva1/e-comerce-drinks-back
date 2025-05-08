@@ -16,6 +16,7 @@ export class ConnectToDB {
       console.log("Connect success to the db!");
     } catch (err) {
       console.error("Failed to connect to the db", err);
+      process.exit(1)
     }
   }
 }

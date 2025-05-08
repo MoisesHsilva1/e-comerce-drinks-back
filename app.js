@@ -8,6 +8,7 @@ import cors from "cors";
 import morgan from "morgan";
 import { ConnectToDB } from "./src/config/database/database-connect.js";
 import drinkRoute from "./src/routes/drink.route.js";
+import userRoute from "./src/routes/user.route.js";
 
 dotenv.config();
 
@@ -25,6 +26,7 @@ const db = new ConnectToDB();
 db.connect();
 
 app.use("/drink", drinkRoute);
+app.use("/user", userRoute);
 
 const options = {
   key: fs.readFileSync(path.join(__dirname, "localhost-key.pem")),
