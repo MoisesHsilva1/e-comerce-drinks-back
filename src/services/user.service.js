@@ -8,12 +8,7 @@ class UserService {
   }
 
   async create(userData) {
-    if (
-      !userData.name ||
-      !userData.email ||
-      !userData.telphone ||
-      !userData.password
-    ) {
+    if (!userData.displayName || !userData.email) {
       throw new Error("All fields required");
     }
 

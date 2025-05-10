@@ -15,6 +15,11 @@ class RouterUser {
       "/create",
       this.#userController.createUser.bind(this.#userController)
     );
+
+    this.router.post(
+      "/login",
+      this.#userController.loginUser.bind(this.#userController)
+    );
   }
 
   getRouter() {
