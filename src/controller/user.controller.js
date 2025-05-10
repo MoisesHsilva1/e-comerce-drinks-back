@@ -50,15 +50,15 @@ class UserController {
         .createCustomToken(uid);
 
       res.status(200).json({
-        message: "Login realizado com sucesso!",
+        message: "Login successful!",
         token: customToken,
         user: userRecord,
       });
     } catch (err) {
-      console.error("Erro ao verificar o token:", err);
+      console.error("Error verifying token:", err);
       res
         .status(400)
-        .json({ error: err.message || "Falha ao realizar o login" });
+        .json({ error: err.message || "Login failed" });
     }
   }
 }
