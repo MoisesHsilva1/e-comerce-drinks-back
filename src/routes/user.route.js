@@ -20,6 +20,11 @@ class RouterUser {
       "/login",
       this.#userController.loginUser.bind(this.#userController)
     );
+
+    this.router.get(
+      "/logged",
+      this.#userController.getLoggedUser.bind(this.#userController)
+    );
   }
 
   getRouter() {

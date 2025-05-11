@@ -1,13 +1,16 @@
 import UserService from "../services/user.service.js";
+import FireBaseAuthService from "../services/firebase-auth.service.js";
 import admin from "firebase-admin";
 
 class UserController {
   #userService;
+  #authService;
   #adminFirebase;
 
   constructor() {
-    this.#adminFirebase = admin;
+    this.#authService = new FireBaseAuthService();
     this.#userService = new UserService();
+    this.#adminFirebase = admin;
   }
 
   async createUser(req, res) {
@@ -36,18 +39,11 @@ class UserController {
   async loginUser(req, res) {
     try {
       const idToken = req.headers.authorization?.split(" ")[1];
-
-      const decodedToken = await this.#adminFirebase
-        .auth()
-        .verifyIdToken(idToken);
+      const decodedToken = await this.#authService.verifyIdToken(idToken);
 
       const uid = decodedToken.uid;
-
-      const userRecord = await this.#adminFirebase.auth().getUser(uid);
-
-      const customToken = await this.#adminFirebase
-        .auth()
-        .createCustomToken(uid);
+      const userRecord = await this.#authService.getUser(uid);
+      const customToken = await this.#authService.createCustomToken(uid);
 
       res.status(200).json({
         message: "Login successful!",
@@ -56,9 +52,21 @@ class UserController {
       });
     } catch (err) {
       console.error("Error verifying token:", err);
-      res
-        .status(400)
-        .json({ error: err.message || "Login failed" });
+      res.status(400).json({ error: err.message || "Login failed" });
+    }
+  }
+
+  async getLoggedUser(req, res) {
+    try {
+      const idToken = req.headers.authorization?.split(" ")[1];
+      const decoded = await this.#authService.verifyIdToken(idToken);
+
+      const userData = await this.#userService.getUserByUid(decoded.uid);
+
+      return res.status(200).json({ logged: true, user: userData });
+    } catch (err) {
+      console.error("Error getting logged user:", err);
+      return res.status(401).json({ logged: false, error: err.message });
     }
   }
 }
