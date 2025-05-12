@@ -8,18 +8,21 @@ class DrinkService {
   }
 
   async create(drinkData) {
-    if (
-      !drinkData.name ||
-      !drinkData.price ||
-      !drinkData.description ||
-      !drinkData.qtd
-    ) {
+    if (!drinkData) {
       throw new Error("All fields required");
     }
 
     const drink = new this.#drinkModel(drinkData);
 
     return await drink.save();
+  }
+
+  async get() {
+    return await this.#drinkModel.find();
+  }
+
+  async getByName(name) {
+    return await this.#drinkModel.findOne({ name });
   }
 }
 

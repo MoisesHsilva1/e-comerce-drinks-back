@@ -44,7 +44,7 @@
   db.connect();
 
   app.use("/drink", drinkRoute);
-  app.use("/user", userRoute);
+  app.use("/user", userRoute);  
 
   const options = {
     key: fs.readFileSync(path.join(__dirname, "localhost-key.pem")),
