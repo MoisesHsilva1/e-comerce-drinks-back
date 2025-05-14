@@ -29,8 +29,6 @@ admin.initializeApp({
   }),
 });
 
-
-
 app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
@@ -41,5 +39,8 @@ db.connect();
 app.use("/drink", drinkRoute);
 app.use("/user", userRoute);
 
+app.get("/", (req, res) => {
+  res.send("Server is Running")
+});
 
 export default app;
