@@ -37,10 +37,8 @@ const db = new ConnectToDB();
 db.connect();
 
 app.use("/drink", drinkRoute);
-app.use("/user", userRoute);
+app.use("/user", userRoute);  
 
-app.get("/", (req, res) => {
-  res.send("Server is Running")
+app.listen(port, () => {
+  console.log(`App listening on https://localhost:${port}`);
 });
-
-export default app;
