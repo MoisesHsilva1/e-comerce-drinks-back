@@ -1,5 +1,6 @@
 import express from "express";
 import DrinkController from "../controller/drink.controller.js";
+import { Timestamp } from "firebase-admin/firestore";
 
 class RouterDrink {
   #drinkController;
@@ -24,6 +25,11 @@ class RouterDrink {
     this.router.get(
       "/listByName/:name",
       this.#drinkController.listByNameDrink.bind(this.#drinkController)
+    );
+
+    this.router.get(
+      "/findById/:id",
+      this.#drinkController.findByIdDrink.bind(this.#drinkController)
     );
   }
 

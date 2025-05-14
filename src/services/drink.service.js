@@ -24,6 +24,10 @@ class DrinkService {
   async getByName(name) {
     return await this.#drinkModel.findOne({ name });
   }
+
+  async getByID(id) {
+    return await this.#drinkModel.findById(id);
+  }
 }
 
 export default DrinkService;

@@ -43,6 +43,21 @@ class DrinkController {
         .json({ error: err.message || "Error in list drinks by name " });
     }
   }
+
+  async findByIdDrink(req, res) {
+    try {
+      const { id } = req.params;
+
+      const drinkById = await this.#drinkService.getByID(id);
+
+      res.status(200).json(drinkById);
+    } catch (err) {
+      console.error(err);
+      res
+        .status(400)
+        .json({ error: err.message || " Error in find drinks by ID" });
+    }
+  }
 }
 
 export default DrinkController;
