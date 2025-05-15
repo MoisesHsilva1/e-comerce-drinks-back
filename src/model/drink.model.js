@@ -6,7 +6,7 @@ const drinkModel = new Schema(
   {
     name: { type: String, required: true },
     description: { type: String, required: true },
-    qtd: { type: Number, required: true },
+    qtd: { type: Object, required: true },
     price: { type: Number, required: true },
     image: { type: String, required: true },
   },
