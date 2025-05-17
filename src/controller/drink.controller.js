@@ -9,8 +9,18 @@ class DrinkController {
 
   async createDrink(req, res) {
     try {
-      const drinkData = req.body;
-      const newDrink = await this.#drinkService.create(drinkData);
+      const { name, description, price } = req.body;
+      const qtd = JSON.parse(req.body.qtd)
+      const image = req.file?.path;
+
+      const newDrink = await this.#drinkService.create({
+        name,
+        description,
+        price,
+        qtd,
+        image,
+      });
+
       res.status(201).json(newDrink);
     } catch (err) {
       console.error(err);
@@ -29,7 +39,7 @@ class DrinkController {
     }
   }
 
-  async listByNameDrink(req, res) {
+  async findByNameDrink(req, res) {
     try {
       const { name } = req.params;
 
