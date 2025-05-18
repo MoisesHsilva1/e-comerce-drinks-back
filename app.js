@@ -1,12 +1,12 @@
-import { ConnectToDB } from "../../src/config/database/database-connect.js";
+import { ConnectToDB } from "./src/config/database/database-connect.js";
 import express from "express";
+import dotenv from "dotenv";
 import cors from "cors";
 import morgan from "morgan";
 import admin from "firebase-admin";
-import drinkRoute from "../../src/routes/drink.route.js";
-import userRoute from "../../src/routes/user.route.js";
-import drinkPurchaseRoute from "../../src/routes/drinkPurchase.route.js";
-import dotenv from "dotenv";
+import drinkRoute from "./src/routes/drink.route.js";
+import userRoute from "./src/routes/user.route.js";
+import drinkPurchaseRoute from "./src/routes/drinkPurchase.route.js";
 
 dotenv.config();
 
@@ -39,8 +39,5 @@ db.connect();
 app.use("/drinkPurchase", drinkPurchaseRoute);
 app.use("/drink", drinkRoute);
 app.use("/user", userRoute);
-app.get("/", (req, res) => {
-  res.send("Server is running");
-});
 
-export default app;
+export default app
