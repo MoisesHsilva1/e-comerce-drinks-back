@@ -6,11 +6,16 @@ import morgan from "morgan";
 import admin from "firebase-admin";
 import drinkRoute from "./src/routes/drink.route.js";
 import userRoute from "./src/routes/user.route.js";
+import drinkPurchaseRoute from "./src/routes/drinkPurchase.route.js";
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+app.use(cors());
+app.use(express.json());
+app.use(morgan("dev"));
 
 admin.initializeApp({
   credential: admin.credential.cert({
@@ -29,15 +34,12 @@ admin.initializeApp({
   }),
 });
 
-app.use(cors());
-app.use(express.json());
-app.use(morgan("dev"));
-
 const db = new ConnectToDB();
 db.connect();
 
+app.use("/drinkPurchase", drinkPurchaseRoute);
 app.use("/drink", drinkRoute);
-app.use("/user", userRoute);  
+app.use("/user", userRoute);
 
 app.listen(port, () => {
   console.log(`App listening on https://localhost:${port}`);
