@@ -40,4 +40,8 @@ app.use("/drinkPurchase", drinkPurchaseRoute);
 app.use("/drink", drinkRoute);
 app.use("/user", userRoute);
 
-export default app
+app.get("/", (req, res) => {
+  res.send("Server is running!");
+});
+
+export default app;
