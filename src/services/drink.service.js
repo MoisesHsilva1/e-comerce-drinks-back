@@ -5,8 +5,8 @@ class DrinkService {
   #drinkModel;
   #cloudinary;
 
-  constructor({ drinkModel, cloudinary } = {}) {
-    this.#drinkModel = drinkModel;
+  constructor() {
+    this.#drinkModel = DrinkModel;
     this.#cloudinary = cloudinary;
   }
 
