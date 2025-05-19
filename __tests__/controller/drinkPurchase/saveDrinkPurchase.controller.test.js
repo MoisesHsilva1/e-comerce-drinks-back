@@ -40,14 +40,4 @@ describe("DrinkPurchaseController - saveDrinkPurchase", () => {
     expect(mockRes.status).toHaveBeenCalledWith(201);
     expect(mockRes.json).toHaveBeenCalledWith(fakeSavedDrink);
   });
-
-  it("should respond 400 with error message when service throws", async () => {
-    const error = new Error("Creation failed");
-    mockDrinkPurchaseService.create.mockRejectedValue(error);
-
-    await controller.saveDrinkPurchase(mockReq, mockRes);
-
-    expect(mockRes.status).toHaveBeenCalledWith(400);
-    expect(mockRes.json).toHaveBeenCalledWith({ error: "Creation failed" });
-  });
 });

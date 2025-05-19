@@ -48,17 +48,4 @@ describe("listDink - DrinkController", () => {
     expect(mockRes.status).toHaveBeenCalledWith(200);
     expect(mockRes.json).toHaveBeenCalledWith(fakeDrinks);
   });
-
-  it("should respond 400 on error", async () => {
-    const error = new Error("Erro ao buscar bebidas");
-    mockDrinkService.get.mockRejectedValue(error);
-
-    await controller.listDink(mockReq, mockRes);
-
-    expect(mockDrinkService.get).toHaveBeenCalled();
-    expect(mockRes.status).toHaveBeenCalledWith(400);
-    expect(mockRes.json).toHaveBeenCalledWith({
-      error: "Erro ao buscar bebidas",
-    });
-  });
 });

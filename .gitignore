@@ -2,3 +2,4 @@
 localhost-cert.pem
 localhost-key.pem
 node_modules/
+.vercel

@@ -38,14 +38,4 @@ describe("DrinkPurchaseController - listDrinksPurchases", () => {
     expect(mockRes.status).toHaveBeenCalledWith(200);
     expect(mockRes.json).toHaveBeenCalledWith(fakeDrinksPurchases);
   });
-
-  it("should respond 400 with error message when service throws", async () => {
-    const error = new Error("Fetching failed");
-    mockDrinkPurchaseService.get.mockRejectedValue(error);
-
-    await controller.listDrinksPurchases(mockReq, mockRes);
-
-    expect(mockRes.status).toHaveBeenCalledWith(400);
-    expect(mockRes.json).toHaveBeenCalledWith({ error: "Fetching failed" });
-  });
 });

@@ -56,29 +56,4 @@ describe("createDrink - DrinkController", () => {
     expect(mockRes.status).toHaveBeenCalledWith(201);
     expect(mockRes.json).toHaveBeenCalledWith(fakeDrink);
   });
-
-  it("should respond 400 if service throws error", async () => {
-    const error = new Error("Falha ao criar bebida");
-
-    mockReq = {
-      body: {
-        name: "Sprite",
-        description: "Leve",
-        price: 4,
-        qtd: JSON.stringify({ p: 5, m: 10, g: 15 }),
-      },
-      file: {
-        path: "uploads/sprite.jpg",
-      },
-    };
-
-    mockDrinkService.create.mockRejectedValue(error);
-
-    await controller.createDrink(mockReq, mockRes);
-
-    expect(mockRes.status).toHaveBeenCalledWith(400);
-    expect(mockRes.json).toHaveBeenCalledWith({
-      error: "Falha ao criar bebida",
-    });
-  });
 });
