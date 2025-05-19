@@ -7,10 +7,10 @@ class UserController {
   #authService;
   #adminFirebase;
 
-  constructor() {
-    this.#authService = new FireBaseAuthService();
-    this.#userService = new UserService();
-    this.#adminFirebase = admin;
+  constructor({ userService, authService, adminFirebase } = {}) {
+    this.#userService = userService ?? new UserService();
+    this.#authService = authService ?? new FireBaseAuthService();
+    this.#adminFirebase = adminFirebase ?? admin;
   }
 
   async createUser(req, res) {

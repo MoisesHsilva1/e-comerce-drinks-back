@@ -3,8 +3,9 @@ import DrinkPurchaseService from "../services/drinkPurchase.service.js";
 class DrinkPurchaseController {
   #drinkPurchaseService;
 
-  constructor() {
-    this.#drinkPurchaseService = new DrinkPurchaseService();
+  constructor({ drinkPurchaseService } = {}) {
+    this.#drinkPurchaseService =
+      drinkPurchaseService || new DrinkPurchaseService();
   }
 
   async saveDrinkPurchase(req, res) {

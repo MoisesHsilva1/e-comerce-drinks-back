@@ -3,14 +3,15 @@ import DrinkService from "../services/drink.service.js";
 class DrinkController {
   #drinkService;
 
-  constructor() {
-    this.#drinkService = new DrinkService();
+
+  constructor({ drinkService } = {}) {
+    this.#drinkService = drinkService || new DrinkService();
   }
 
   async createDrink(req, res) {
     try {
       const { name, description, price } = req.body;
-      const qtd = JSON.parse(req.body.qtd)
+      const qtd = JSON.parse(req.body.qtd);
       const image = req.file?.path;
 
       const newDrink = await this.#drinkService.create({
