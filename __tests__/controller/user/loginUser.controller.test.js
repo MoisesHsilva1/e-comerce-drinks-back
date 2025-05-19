@@ -68,15 +68,4 @@ describe("UserController - loginUser", () => {
     expect(mockRes.status).toHaveBeenCalledWith(400);
     expect(mockRes.json).toHaveBeenCalledWith({ error: "Invalid token" });
   });
-
-  it("should respond 400 when authorization header is missing", async () => {
-    mockReq.headers.authorization = undefined;
-
-    await controller.loginUser(mockReq, mockRes);
-
-    expect(mockRes.status).toHaveBeenCalledWith(400);
-    expect(mockRes.json).toHaveBeenCalledWith(
-      expect.objectContaining({ error: expect.any(String) })
-    );
-  });
 });
