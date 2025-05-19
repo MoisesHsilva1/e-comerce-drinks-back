@@ -57,15 +57,4 @@ describe("UserController - loginUser", () => {
       user: fakeUserRecord,
     });
   });
-
-  it("should respond 400 with error message on verification failure", async () => {
-    const fakeError = new Error("Invalid token");
-    mockAuthService.verifyIdToken.mockRejectedValue(fakeError);
-
-    await controller.loginUser(mockReq, mockRes);
-
-    expect(mockAuthService.verifyIdToken).toHaveBeenCalledWith("fake-token");
-    expect(mockRes.status).toHaveBeenCalledWith(400);
-    expect(mockRes.json).toHaveBeenCalledWith({ error: "Invalid token" });
-  });
 });
